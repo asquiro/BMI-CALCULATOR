@@ -1,0 +1,143 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'resuable.dart';
+import 'icon_content.dart';
+
+const activeColor = Color(0xFF111328);
+const inactiveColor = Color(0xFF124d33);
+
+enum Gender {
+  male,
+  female,
+}
+
+class InputPage extends StatefulWidget {
+  const InputPage({Key? key}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return _InputPageState();
+  }
+}
+
+class _InputPageState extends State<InputPage> {
+  Gender selectedGender;
+  // Color maleCardColor = inactiveColor;
+  // Color femaleCardColor = inactiveColor;
+
+  // void updateColor(Gender selectedGender) {
+  //   if (selectedGender == Gender.male) {
+  //     if (maleCardColor == inactiveColor) {
+  //       maleCardColor == activeColor;
+  //       femaleCardColor == inactiveColor;
+  //     } else {
+  //       maleCardColor == inactiveColor;
+  //     }
+  //   }
+
+  //   if (selectedGender == Gender.female) {
+  //     if (femaleCardColor == inactiveColor) {
+  //       femaleCardColor == activeColor;
+  //       maleCardColor == inactiveColor;
+  //     } else {
+  //       femaleCardColor == inactiveColor;
+  //     }
+  //   }
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text('BMI CALCULATOR'),
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    child: ResuableCard(
+                      colour: selectedGender == Gender.male
+                          ? activeColor
+                          : inactiveColor,
+                      childClass: Icon_Content(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'Male',
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    child: ResuableCard(
+                      colour: selectedGender == Gender.female
+                          ? activeColor
+                          : inactiveColor,
+                      childClass: Icon_Content(
+                        icon: FontAwesomeIcons.galacticRepublic,
+                        label: 'Female',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ResuableCard(
+                    colour: activeColor,
+                    childClass: Icon_Content(
+                      icon: FontAwesomeIcons.ad,
+                      label: 'Fox',
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ResuableCard(
+                    colour: activeColor,
+                    childClass: Icon_Content(
+                      icon: FontAwesomeIcons.airFreshener,
+                      label: 'AirC',
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ResuableCard(
+                    colour: activeColor,
+                    childClass: Icon_Content(
+                      icon: FontAwesomeIcons.graduationCap,
+                      label: 'OkC',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
